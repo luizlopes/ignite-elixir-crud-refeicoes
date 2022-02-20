@@ -15,8 +15,8 @@ defmodule Exmeal.Meal do
     timestamps()
   end
 
-  def changeset(params) do
-    %__MODULE__{}
+  def changeset(struct \\ %__MODULE__{}, params) do
+    struct
     |> cast(params, @fields)
     |> validate_required(@fields)
     |> validate_length(:description, min: 6)
