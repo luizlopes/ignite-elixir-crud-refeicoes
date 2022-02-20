@@ -3,7 +3,9 @@ defmodule Exmeal.Meal do
 
   import Ecto.Changeset
 
+  @primary_key {:id, :binary_id, autogenerate: true}
   @fields [:description, :date, :calories]
+  @derive {Jason.Encoder, only: @fields ++ [:id]}
 
   schema "meals" do
     field(:description, :string)
