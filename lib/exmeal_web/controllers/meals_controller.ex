@@ -2,7 +2,7 @@ defmodule ExmealWeb.MealsController do
   use ExmealWeb, :controller
 
   alias Exmeal.Meal
-  alias Exmeal.Meals.{Create, Get}
+  alias Exmeal.Meals.{Create, Delete, Get}
 
   action_fallback(ExmealWeb.FallbackController)
 
@@ -19,6 +19,14 @@ defmodule ExmealWeb.MealsController do
       conn
       |> put_status(:ok)
       |> render("meal.json", meal: meal)
+    end
+  end
+
+  def delete(conn, %{"id" => id}) do
+    with {:ok, _meal} <- Delete.call(id) do
+      conn
+      |> put_status(:no_content)
+      |> text("")
     end
   end
 end
